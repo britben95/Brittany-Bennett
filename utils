@@ -1,0 +1,77 @@
+import os
+
+
+def get_project_root():
+    path = os.path.abspath(__file__)
+    return os.path.dirname(path)
+
+
+def get_datasets_folder():
+    return os.path.join(get_project_root(), "datasets")
+
+
+def get_csv_dataset(name):
+    return "{}/{}.csv".format(get_datasets_folder(), name)
+def getSAT(pandas):
+    return pandas.read_csv(
+        filepath_or_buffer=("SATRIP_detectionsummary.csv"),
+       # index_col='PassengerId',
+        engine='python'
+    )
+
+def get_SATRIP_detectionsummary(pandas):
+    return pandas.read_csv(
+        filepath_or_buffer=("SATRIP_detectionsummary.csv"),
+        index_col='PassengerId',
+        engine='python'
+    )
+
+
+def percent(part, total):
+    return part * 100.0 / total
+
+
+def round2(number):
+    return round(number, 2)
+
+
+def join(iterable, delimiter=" ", mapper=None) -> str:
+    if mapper is not None:
+        return delimiter.join(map(lambda i: str(mapper(i)), iterable))
+    else:
+        return delimiter.join(map(str, iterable))
+
+class Executor:
+
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def print_title(title):
+        print("\n||| " + title + " |||\n")
+
+    @staticmethod
+    def write_to_file(name, text):
+        import errno
+
+        try:
+            answers_dir = "./answers"
+            try:
+                os.makedirs(answers_dir)
+            except OSError as e:
+                if e.errno != errno.EEXIST:
+                    raise
+            answer_file = "{}/{}.txt".format(answers_dir, str(name))
+            print(f"Writing to {answer_file}:\n{text}")
+            with open(answer_file, "w") as f:
+                f.write(str(text))
+        except IOError:
+            pass
+
+    def execute(self, title, algorithm, write_to_file=True):
+        self.print_answer(title, algorithm(), write_to_file)
+
+    def print_answer(self, title, answer, write_to_file=True):
+        self.print_title(title)
+        if write_to_file:
+            self.write_to_file(title, answer)
