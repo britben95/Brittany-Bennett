@@ -6,106 +6,98 @@ ex = Executor()
 
 #data = get_titanic_dataset(p)
 data=getSAT(p)
+#def most_popular_feminine_name():
 
+def most_popular_location_s_name():
+        name = data['LocationName'][data['Direction'] == 'S'] \
+        .str.extract('(\\w+[a|e]\\b)', expand=False) \
+        .value_counts() \
+    .index[0]
+        return name
+header = "Most Popular South Location"
+ex.execute(header, most_popular_location_s_name)
+def most_popular_location_n_name():
+    name = data['LocationName'][data['Direction'] == 'N'] \
+       .str.extract('(\\w+[a|e]\\b)', expand=False) \
+       .value_counts() \
+        .index[0]
+    return name
+ex.execute(header, most_popular_location_n_name)
 #header = "Males and females"
-header = "DetName and Location"
+
+#header = "Most popular North Location"
 #def male_and_female_count():
-def DetName_and_Location_count():
+#def AssetNum_and_LocationName_count():
     #sex_data = data['Sex'].value_counts()
-    sex_data = data['Location'].value_counts()
-    #loc_data = data['lex.execute(header, most_popular_feminine_name)'].value_counts()
-    loc_data = data['lex.execute(header, most_popular_location_name)'].value_counts()
+    #street_data = data['LocationName'].value_counts()
+    #ex.execute(header, most_popular_location_name)
+    #loc_data = data['lex.execute(header, most_popular_location_s_name)'].value_counts()
+   # name1=most_popular_location_name
+    #ex.execute(header, most_popular_location_s_name)
+
+    #loc_data = data['lex.execute(header, most_popular_location_s_name)'].value_counts()
     #answer_tuple = [sex_data['male'], sex_data['female']]
-    answer_tuple = [loc_data['DetName'], loc_data['Location']]
-    return "{} {}".format(answer_tuple[0], answer_tuple[1])
+    #ex.execute(header, most_popular_location_s_name)
+    #answer_tuple = [street_data['AssetNum'], street_data['LocationName']]
+   # return "{} {}".format(answer_tuple[0], answer_tuple[1])
 
 
 #ex.execute(header, male_and_female_count)
-ex.execute(header, DetName_and_Location_count)
+#ex.execute(header, DetName_and_Location_count)
 
 #header = "Survived passengers"
-header = "direction"
-
-
+#header = "Frequent Destination"
 #def survived_passengers():
-def det_direction():
-    total = len(data)
-    #survived = len(data[data['Survived'] == 1])
-    direction = len(data[data['direction'] == 1])
-    #return round2(percent(survived, total))
-    return round2(percent(direction, total))
-
+#def destination():
+#    total = len(data)
+#    #survived = len(data[data['Survived'] == 1])
+#    destination = len(data[data['Destination'] == 1])
+#    #return round2(percent(survived, total))
+#    return round2(percent(destination, total))
 
 #ex.execute(header, survived_passengers)
-ex.execute(header, det_direction)
-
+#ex.execute(header, destination)
 
 #header = "First class passengers"
-header = "Lanes Used"
-
-
+#header = "Lanes Used"
 #def first_class_passengers():
-def lanes_used():
-    total = len(data)
+##   total = len(data)
     #first_class = len(data[data['Pclass'] == 1])
-    first_class = len(data[data['Lanes'] == 1])
+    #first_class = len(data[data['Lanes'] == 1])
     #return round2(percent(first_class, total))
-    return round2(percent(lanes_used, total))
-
-
-
+#    return round2(percent(lanes_used, total))
 #ex.execute(header, first_class_passengers)
-ex.execute(header, lanes_used)
-
+#ex.execute(header, lanes_used)
 #header = "Age average and median"
-header = "Volume average and median"
-
+#header = "Volume average and median"
 #def age_avg_med():
-def volume_avg_med():
+#def volume_avg_med():
     #ages = data['Age']
-    volume = data['Volume']
+ #   volume = data['Volume']
     #answer_tuple = {round2(np.nanmean(ages)), round2(np.nanmedian(ages))}
-    answer_tuple = {round2(np.nanmean(volume)), round2(np.nanmedian(volume))}
-    return "{} {}".format(answer_tuple[0], answer_tuple[1])
-
+  #  answer_tuple = {round2(np.nanmean(volume)), round2(np.nanmedian(volume))}
+ #   return "{} {}".format(answer_tuple[0], answer_tuple[1])
 
 #ex.execute(header, age_avg_med)
-ex.execute(header, volume_avg_med)
-
+#ex.execute(header, volume_avg_med)
 
 #header = "Pearson correlation"
-header = "Latitude and Longitude"
-
-
+#header = "Latitude and Longitude"
 #def pearson_correlation():
-def Latitude_Longitude():
+#def latitude_longitude():
     #siblings_and_spouses = data['SibSp']
-    latitude = data['latit']
+   # latitude = data['latit']
     #parents_and_children = data['Parch']
-    longitude = data['longt']
+    #longitude = data['longt']
     #return round2(siblings_and_spouses.corr(parents_and_children))
-    return round2(latitude.corr(longitude))
-
+    #return round2(latitude.corr(longitude))
 
 #ex.execute(header, pearson_correlation)
-ex.execute(header, Latitude_Longitude)
-
+#ex.execute(header, latitude_longitude)
 
 #header = "The most popular feminine name"
-header = "The most popular location is "
-
-
-#def most_popular_feminine_name():
-def most_popular_location_name():
-    #name = data['Name'][data['Sex'] == 'female'] \
-    name = data['DetName'][data['Location'] == 'street'] \
-        .str.extract('(\\w+[a|e]\\b)', expand=False) \
-
-        .value_counts() \
-
-        .index[0]
-    return name
-
+#header = "The most popular location is "
 
 #ex.execute(header, most_popular_feminine_name)
-ex.execute(header, most_popular_location_name)
+
+#ex.execute(header, most_popular_location_n_name)
