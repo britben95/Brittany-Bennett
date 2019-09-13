@@ -1,5 +1,3 @@
-#Warning this file is not updated from original
-
 import pandas as p
 from sklearn.tree import DecisionTreeClassifier
 from utils import *
@@ -8,16 +6,16 @@ e = Executor()
 
 clf = DecisionTreeClassifier(random_state=241)
 
-features = ['Pclass', 'Fare', 'Age', 'Sex']
-data = get_titanic_dataset(p)
-data = data[p.notna(data['Age'])].replace('male', 0).replace('female', 1)
-
+#features = ['Pclass', 'Fare', 'Age', 'Sex']
+features = ['Latitude', 'Longitude', 'TimeStamp', 'LocationName']
+data = getSAT(p)
+data = data[p.notna(data['LocationName'])].replace('Latitude', 0).replace('Longitude', 1)
 df_features = data.loc[:, features]
-df_target = data['Survived']
+df_target = data['Frequent Stop']
 
 clf.fit(df_features, df_target)
 
-title = "Feature importances"
+title = "Featured importances"
 
 
 def calculate_importances(classifier):
